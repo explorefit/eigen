@@ -100,7 +100,6 @@ export function useNewImageCarouselContext({
                   animated: false,
                 })
               }
-              // tslint:disable-next-line: no-unused-expression
               onImageIndexChange && onImageIndexChange(imageIndex.current)
             }
             break

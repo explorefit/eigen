@@ -85,7 +85,6 @@ describe(FeatureQueryRenderer, () => {
                             description: "link 1 description",
                           },
                         },
-                        ,
                       ],
                     },
                   },

@@ -10,7 +10,7 @@ import { BucketKey } from "../bucketCityResults"
 import { FilterData } from "../types"
 
 interface Props {
-  featureCollections: { [key in BucketKey]: FilterData } | {}
+  featureCollections: { [key in BucketKey]: FilterData } | Record<string, unknown>
   onPress?: ShapeSourceProps["onPress"]
   duration?: number
   filterID: string

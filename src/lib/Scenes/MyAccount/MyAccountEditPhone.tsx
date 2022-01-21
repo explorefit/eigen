@@ -54,7 +54,7 @@ const MyAccountEditPhone: React.FC<{ me: MyAccountEditPhone_me }> = ({ me }) => 
   )
 }
 
-const MyAccountEditPhonePlaceholder: React.FC<{}> = ({}) => {
+const MyAccountEditPhonePlaceholder: React.FC = () => {
   return (
     <MyAccountFieldEditScreenPlaceholder title="Phone">
       <PlaceholderBox height={40} />
@@ -70,7 +70,7 @@ const MyAccountEditPhoneContainer = createFragmentContainer(MyAccountEditPhone, 
   `,
 })
 
-export const MyAccountEditPhoneQueryRenderer: React.FC<{}> = () => {
+export const MyAccountEditPhoneQueryRenderer: React.FC = () => {
   return (
     <QueryRenderer<MyAccountEditPhoneQuery>
       environment={defaultEnvironment}

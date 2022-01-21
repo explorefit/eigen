@@ -537,7 +537,7 @@ const BelowTheFoldPlaceholder: React.FC = () => {
   )
 }
 
-const HomePlaceholder: React.FC<{}> = () => {
+const HomePlaceholder: React.FC = () => {
   const enableViewingRooms = useFeatureFlag("AREnableViewingRooms")
 
   return (

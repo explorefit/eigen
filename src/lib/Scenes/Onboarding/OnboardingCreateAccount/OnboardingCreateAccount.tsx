@@ -29,7 +29,7 @@ export const OnboardingCreateAccount: React.FC = () => {
 export interface OnboardingCreateAccountProps
   extends StackScreenProps<OnboardingNavigationStack, "OnboardingCreateAccount"> {}
 
-// tslint:disable-next-line:interface-over-type-literal
+// eslint-disable-next-line @typescript-eslint/consistent-type-definitions
 export type OnboardingCreateAccountNavigationStack = {
   OnboardingCreateAccountEmail: OnboardingCreateAccountEmailParams
   OnboardingCreateAccountPassword: undefined
@@ -41,7 +41,6 @@ export type OnboardingCreateAccountNavigationStack = {
 
 const StackNavigator = createStackNavigator<OnboardingCreateAccountNavigationStack>()
 
-// tslint:disable-next-line:variable-name
 export const __unsafe__createAccountNavigationRef: React.MutableRefObject<NavigationContainerRef | null> =
   {
     current: null,
@@ -102,7 +101,7 @@ export const OnboardingCreateAccountWithEmail: React.FC<OnboardingCreateAccountP
       { setErrors }
     ) => {
       switch (getCurrentRoute()) {
-        case "OnboardingCreateAccountEmail":
+        case "OnboardingCreateAccountEmail": {
           const userExists = await GlobalStore.actions.auth.userExists({ email })
 
           // When the user exists already we want to take them to the login screen
@@ -117,6 +116,7 @@ export const OnboardingCreateAccountWithEmail: React.FC<OnboardingCreateAccountP
             )
           }
           break
+        }
         case "OnboardingCreateAccountPassword":
           __unsafe__createAccountNavigationRef.current?.navigate("OnboardingCreateAccountName")
           break

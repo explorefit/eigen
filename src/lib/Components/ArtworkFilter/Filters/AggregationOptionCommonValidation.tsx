@@ -36,9 +36,7 @@ export const sharedAggregateFilterValidation = (params: ValidationParams) => {
   }
 
   describe(params.name + " filter option", () => {
-    let initialState: ArtworkFiltersState
-
-    initialState = {
+    const initialState: ArtworkFiltersState = {
       selectedFilters: [],
       appliedFilters: [],
       previouslyAppliedFilters: [],

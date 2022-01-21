@@ -129,7 +129,7 @@ export const Pill: React.FC<PillProps> = ({
           >
             {iconPosition === "left" && !!Icon && (
               <>
-                {<Icon fill={iconColor} />}
+                <Icon fill={iconColor} />
                 <Spacer mr={iconSpacerMargin} />
               </>
             )}

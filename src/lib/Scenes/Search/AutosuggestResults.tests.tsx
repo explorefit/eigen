@@ -117,7 +117,7 @@ jest.mock("lodash", () => ({
 
 jest.unmock("react-relay")
 
-// tslint:disable-next-line:no-empty
+// eslint-disable-next-line @typescript-eslint/no-empty-function
 jest.mock("@sentry/react-native", () => ({ init() {}, captureMessage() {} }))
 
 jest.mock("./RecentSearches", () => {
@@ -129,7 +129,6 @@ jest.mock("./RecentSearches", () => {
   }
 })
 
-// tslint:disable-next-line:no-var-requires
 const notifyRecentSearchMock = require("./RecentSearches").useRecentSearches().notifyRecentSearch
 
 const env = defaultEnvironment as any as ReturnType<typeof createMockEnvironment>

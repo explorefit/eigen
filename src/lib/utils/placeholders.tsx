@@ -32,9 +32,9 @@ function useCurrentTime() {
   return clock
 }
 
-export const ProvidePlaceholderContext: React.FC<{}> = ({ children }) => {
+export const ProvidePlaceholderContext: React.FC = ({ children }) => {
   const clock = useCurrentTime()
-  return <PlaceholderContext.Provider value={{ clock }} children={children} />
+  return <PlaceholderContext.Provider value={{ clock }}>{children}</PlaceholderContext.Provider>
 }
 
 export const PlaceholderBox: React.FC<ViewStyle> = ({ children, ...styles }) => {
@@ -63,8 +63,9 @@ export const PlaceholderBox: React.FC<ViewStyle> = ({ children, ...styles }) => 
           verticalOffset.setValue(-y + h / 2)
         })
       }}
-      children={children}
-    />
+    >
+      {children}
+    </Animated.View>
   )
 }
 

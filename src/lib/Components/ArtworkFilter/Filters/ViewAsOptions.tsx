@@ -5,8 +5,8 @@ import {
   FilterDisplayName,
   FilterParamName,
   ViewAsValues,
+  FilterData,
 } from "lib/Components/ArtworkFilter/ArtworkFilterHelpers"
-import { FilterData } from "lib/Components/ArtworkFilter/ArtworkFilterHelpers"
 import {
   ArtworksFiltersStore,
   useSelectedOptionsDisplay,

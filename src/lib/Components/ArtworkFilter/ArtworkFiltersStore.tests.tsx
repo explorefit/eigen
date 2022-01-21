@@ -3,8 +3,9 @@ import { FilterArray, FilterParamName } from "lib/Components/ArtworkFilter/Artwo
 import {
   getArtworkFiltersModel,
   selectedOptionsUnion,
+  ArtworkFiltersModel,
+  ArtworkFiltersState,
 } from "lib/Components/ArtworkFilter/ArtworkFilterStore"
-import { ArtworkFiltersModel, ArtworkFiltersState } from "./ArtworkFilterStore"
 
 let filterState: ArtworkFiltersState
 

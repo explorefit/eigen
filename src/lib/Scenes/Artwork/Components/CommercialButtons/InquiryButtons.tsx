@@ -5,8 +5,7 @@ import {
   ArtworkInquiryContext,
   ArtworkInquiryStateProvider,
 } from "lib/utils/ArtworkInquiry/ArtworkInquiryStore"
-import { InquiryTypes } from "lib/utils/ArtworkInquiry/ArtworkInquiryTypes"
-import { InquiryOptions } from "lib/utils/ArtworkInquiry/ArtworkInquiryTypes"
+import { InquiryTypes, InquiryOptions } from "lib/utils/ArtworkInquiry/ArtworkInquiryTypes"
 import { Button, ButtonProps } from "palette"
 import React, { useContext, useState } from "react"
 import { createFragmentContainer, graphql } from "react-relay"

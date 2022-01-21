@@ -113,7 +113,7 @@ const FeatureApp: React.FC<FeatureAppProps> = ({ feature }) => {
 
     if (count > 0) {
       switch (set.itemType) {
-        case "FeaturedLink":
+        case "FeaturedLink": {
           const numColumns = isPad() ? (orientation === "landscape" ? 3 : 2) : 1
           const columnWidth = (width - 20) / numColumns - 20
 
@@ -148,6 +148,7 @@ const FeatureApp: React.FC<FeatureAppProps> = ({ feature }) => {
           )
 
           break
+        }
         case "Artwork":
           renderedSet.push({
             key: "artworks:" + set.id,

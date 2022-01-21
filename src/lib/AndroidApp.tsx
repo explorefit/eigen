@@ -35,7 +35,7 @@ if (UIManager.setLayoutAnimationEnabledExperimental) {
   UIManager.setLayoutAnimationEnabledExperimental(true)
 }
 
-const Main: React.FC<{}> = track()(({}) => {
+const Main: React.FC = track()(() => {
   useEffect(() => {
     GoogleSignin.configure({
       webClientId: "673710093763-hbj813nj4h3h183c4ildmu8vvqc0ek4h.apps.googleusercontent.com",

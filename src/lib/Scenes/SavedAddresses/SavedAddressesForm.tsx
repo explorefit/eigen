@@ -319,7 +319,7 @@ export const SavedAddressesFormPlaceholder: React.FC<{ addressId?: string }> = (
   )
 }
 
-export const SavedAddressesFormQueryRenderer: React.FC<{}> = (props) => (
+export const SavedAddressesFormQueryRenderer: React.FC = (props) => (
   <QueryRenderer<SavedAddressesFormQuery>
     environment={defaultEnvironment}
     query={graphql`

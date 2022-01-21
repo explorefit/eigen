@@ -7,7 +7,7 @@ import {
   MyAccountFieldEditScreenProps,
 } from "./Components/MyAccountFieldEditScreen"
 
-export const MyAccountEditPassword: React.FC<{}> = ({}) => {
+export const MyAccountEditPassword: React.FC = () => {
   const [currentPassword, setCurrentPassword] = useState<string>("")
   const [newPassword, setNewPassword] = useState<string>("")
   const [passwordConfirmation, setPasswordConfirmation] = useState<string>("")

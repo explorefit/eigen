@@ -21,7 +21,6 @@ import { NativeModules } from "react-native"
  *   These are unique in that they are created and destroyed, while all the others are only created once
  */
 
-// tslint:disable-next-line:variable-name
 export const __unsafe_mainModalStackRef = { current: null as NavigationContainerRef | null }
 
 type Mutable<T> = T extends object
@@ -78,6 +77,7 @@ function getCurrentlyPresentedModalNavStackKey() {
  * You might want the switchTab function in navigate.ts
  * @param tab
  */
+// eslint-disable-next-line @typescript-eslint/naming-convention
 export function __unsafe_switchTab(tab: BottomTabType) {
   __unsafe_mainModalStackRef.current?.dispatch(TabActions.jumpTo(tab))
 }

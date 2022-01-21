@@ -8,6 +8,7 @@ import "react-native"
 
 import { Button } from "palette"
 import { Checkbox } from "palette/elements/Checkbox"
+// eslint-disable-next-line import/default
 import relay from "react-relay"
 import { FakeNavigator } from "./Helpers/FakeNavigator"
 import { SelectMaxBid } from "./Screens/SelectMaxBid"

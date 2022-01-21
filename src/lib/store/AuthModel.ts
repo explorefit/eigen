@@ -71,8 +71,8 @@ export interface AuthModel {
 
   // Actions
   setState: Action<this, Partial<StateMapper<this, "1">>>
-  getXAppToken: Thunk<this, void, {}, GlobalStoreModel, Promise<string>>
-  userExists: Thunk<this, { email: string }, {}, GlobalStoreModel>
+  getXAppToken: Thunk<this, void, unknown, GlobalStoreModel, Promise<string>>
+  userExists: Thunk<this, { email: string }, unknown, GlobalStoreModel>
   signIn: Thunk<
     this,
     { email: string; onboardingState?: OnboardingState } & (
@@ -90,7 +90,7 @@ export interface AuthModel {
           appleUID: string
         }
     ),
-    {},
+    unknown,
     GlobalStoreModel,
     Promise<boolean>
   >
@@ -111,26 +111,32 @@ export interface AuthModel {
           appleUID: string
         }
     ),
-    {},
+    unknown,
     GlobalStoreModel,
     Promise<{ success: boolean; message?: string }>
   >
   authFacebook: Thunk<
     this,
     { signInOrUp: "signIn" } | { signInOrUp: "signUp"; agreedToReceiveEmails: boolean },
-    {},
+    unknown,
     GlobalStoreModel,
     Promise<true>
   >
   authGoogle: Thunk<
     this,
     { signInOrUp: "signIn" } | { signInOrUp: "signUp"; agreedToReceiveEmails: boolean },
-    {},
+    unknown,
     GlobalStoreModel,
     Promise<true>
   >
-  authApple: Thunk<this, { agreedToReceiveEmails?: boolean }, {}, GlobalStoreModel, Promise<true>>
-  forgotPassword: Thunk<this, { email: string }, {}, GlobalStoreModel, Promise<boolean>>
+  authApple: Thunk<
+    this,
+    { agreedToReceiveEmails?: boolean },
+    unknown,
+    GlobalStoreModel,
+    Promise<true>
+  >
+  forgotPassword: Thunk<this, { email: string }, unknown, GlobalStoreModel, Promise<boolean>>
   gravityUnauthenticatedRequest: Thunk<
     this,
     {
@@ -139,7 +145,7 @@ export interface AuthModel {
       body?: object
       headers?: RequestInit["headers"]
     },
-    {},
+    unknown,
     GlobalStoreModel,
     ReturnType<typeof fetch>
   >
@@ -147,7 +153,7 @@ export interface AuthModel {
 
   notifyTracking: Thunk<this, { userId: string | null }>
   requestPushNotifPermission: Thunk<this>
-  didRehydrate: ThunkOn<this, {}, GlobalStoreModel>
+  didRehydrate: ThunkOn<this, unknown, GlobalStoreModel>
 }
 
 export const getAuthModel = (): AuthModel => ({
@@ -404,6 +410,7 @@ export const getAuthModel = (): AuthModel => ({
     return { success: false, message }
   }),
   authFacebook: thunk(async (actions, options) => {
+    // eslint-disable-next-line no-async-promise-executor
     return await new Promise<true>(async (resolve, reject) => {
       const { declinedPermissions, isCancelled } = await LoginManager.logInWithPermissions([
         "public_profile",
@@ -500,6 +507,7 @@ export const getAuthModel = (): AuthModel => ({
     })
   }),
   authGoogle: thunk(async (actions, options) => {
+    // eslint-disable-next-line no-async-promise-executor
     return await new Promise<true>(async (resolve, reject) => {
       if (!(await GoogleSignin.hasPlayServices())) {
         reject("Play services are not available.")
@@ -561,6 +569,7 @@ export const getAuthModel = (): AuthModel => ({
     })
   }),
   authApple: thunk(async (actions, { agreedToReceiveEmails }) => {
+    // eslint-disable-next-line no-async-promise-executor
     return await new Promise<true>(async (resolve, reject) => {
       // we cannot have separated logic for sign in and sign up with apple, as with google or facebook,
       // because apple returns email only on the FIRST auth attempt, so we run sign up and sign in one by one

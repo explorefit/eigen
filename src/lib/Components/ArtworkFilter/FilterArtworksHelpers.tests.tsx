@@ -1,8 +1,6 @@
 import {
   FilterArray,
   getUnitedSelectedAndAppliedFilters,
-} from "lib/Components/ArtworkFilter/ArtworkFilterHelpers"
-import {
   aggregationsWithFollowedArtists,
   changedFiltersParams,
   filterArtworksParams,
@@ -11,7 +9,7 @@ import {
   getParamsForInputByFilterType,
   getSelectedFiltersCounts,
   prepareFilterArtworksParamsForInput,
-} from "./ArtworkFilterHelpers"
+} from "lib/Components/ArtworkFilter/ArtworkFilterHelpers"
 
 describe("changedFiltersParams helper", () => {
   it("when a medium selection changed and sort selection unchanged", () => {
