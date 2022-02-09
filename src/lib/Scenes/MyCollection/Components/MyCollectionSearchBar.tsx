@@ -1,4 +1,4 @@
-import { useStickyTabPageContext } from "lib/Components/StickyTabPage/SitckyTabPageContext"
+import { useStickyTabPageContext } from "lib/Components/StickyTabPage/StickyTabPageContext"
 import { GridViewIcon } from "lib/Icons/GridViewIcon"
 import { ListViewIcon } from "lib/Icons/ListViewIcon"
 import SearchIcon from "lib/Icons/SearchIcon"
