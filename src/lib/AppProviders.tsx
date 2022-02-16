@@ -1,6 +1,6 @@
 import { ActionSheetProvider } from "@expo/react-native-action-sheet"
 import { Theme } from "palette"
-import React, { Component, FC, ReactNode } from "react"
+import React, { Component, ReactNode } from "react"
 import { SafeAreaProvider } from "react-native-safe-area-context"
 import { RelayEnvironmentProvider } from "react-relay"
 import { _FancyModalPageWrapper } from "./Components/FancyModal/FancyModalContext"
@@ -19,9 +19,9 @@ export const AppProviders = ({ children }: { children?: ReactNode }) =>
       // order matters here, be careful!
       // if Provider A is using another Provider B, then A needs to appear below B.
       TrackingProvider,
+      GlobalStoreProvider,
       SafeAreaProvider,
       ProvideScreenDimensions, // uses: SafeAreaProvider
-      GlobalStoreProvider,
       RelayDefaultEnvProvider,
       Theme,
       RetryErrorBoundary,
@@ -36,12 +36,12 @@ export const AppProviders = ({ children }: { children?: ReactNode }) =>
 // Providers with preset props
 
 // relay needs the default environment
-const RelayDefaultEnvProvider: FC = (props) => (
+const RelayDefaultEnvProvider = (props: { children?: ReactNode }) => (
   <RelayEnvironmentProvider environment={defaultEnvironment} {...props} />
 )
 
 // react-track has no provider, we make one using the decorator and a class wrapper
-const TrackingProvider: FC = (props) => <PureWrapper {...props} />
+const TrackingProvider = (props: { children?: ReactNode }) => <PureWrapper {...props} />
 
 @track()
 class PureWrapper extends Component {

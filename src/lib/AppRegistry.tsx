@@ -3,8 +3,6 @@ import { SafeAreaInsets } from "lib/types/SafeAreaInsets"
 import React, { useEffect } from "react"
 import { AppRegistry, LogBox, Platform, View } from "react-native"
 import { GraphQLTaggedNode } from "relay-runtime"
-// keep this import of storybook last, otherwise it produces an error when debugging
-import { StorybookUIRoot } from "../storybook/storybook-ui"
 import { AppProviders } from "./AppProviders"
 import { ArtsyKeyboardAvoidingViewContext } from "./Components/ArtsyKeyboardAvoidingView"
 import { ArtsyReactWebViewPage, useWebViewCookies } from "./Components/ArtsyReactWebView"
@@ -117,12 +115,18 @@ import {
   SEGMENT_TRACKING_PROVIDER,
   SegmentTrackingProvider,
 } from "./utils/track/SegmentTrackingProvider"
-import { useExperiments } from "./utils/useExperiments"
+import { useDebugging } from "./utils/useDebugging"
+import { useSplitExperiments } from "./utils/useExperiments"
 import { useFreshInstallTracking } from "./utils/useFreshInstallTracking"
+import { useIdentifyUser } from "./utils/useIdentifyUser"
 import { usePreferredThemeTracking } from "./utils/usePreferredThemeTracking"
 import { useScreenDimensions } from "./utils/useScreenDimensions"
 import { useScreenReaderTracking } from "./utils/useScreenReaderTracking"
 import { useStripeConfig } from "./utils/useStripeConfig"
+import { useExperiments } from "./utils/experiments/hooks"
+
+// keep this import of storybook last, otherwise it might produce errors when debugging
+import { StorybookUIRoot } from "../storybook/storybook-ui"
 
 LogBox.ignoreLogs([
   "Non-serializable values were found in the navigation state",
@@ -445,6 +449,8 @@ for (const moduleName of Object.keys(modules)) {
 }
 
 const Main: React.FC = () => {
+  useDebugging()
+  useExperiments()
   usePreferredThemeTracking()
   useScreenReaderTracking()
   useFreshInstallTracking()
@@ -465,8 +471,9 @@ const Main: React.FC = () => {
   useSentryConfig()
   useStripeConfig()
   useWebViewCookies()
-  useExperiments()
+  useSplitExperiments()
   useInitializeQueryPrefetching()
+  useIdentifyUser()
 
   if (!isHydrated) {
     return <View />

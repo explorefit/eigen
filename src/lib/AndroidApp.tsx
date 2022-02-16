@@ -19,11 +19,14 @@ import { ModalStack } from "./navigation/ModalStack"
 import { BottomTabsNavigator } from "./Scenes/BottomTabs/BottomTabsNavigator"
 import { ForceUpdate } from "./Scenes/ForceUpdate/ForceUpdate"
 import { Onboarding } from "./Scenes/Onboarding/Onboarding"
+import { useExperiments } from "./utils/experiments/hooks"
 import { createAllChannels, savePendingToken } from "./utils/PushNotification"
 import { useInitializeQueryPrefetching } from "./utils/queryPrefetching"
 import { ConsoleTrackingProvider } from "./utils/track/ConsoleTrackingProvider"
-import { useExperiments } from "./utils/useExperiments"
+import { useDebugging } from "./utils/useDebugging"
+import { useSplitExperiments } from "./utils/useExperiments"
 import { useFreshInstallTracking } from "./utils/useFreshInstallTracking"
+import { useIdentifyUser } from "./utils/useIdentifyUser"
 import { useInitialNotification } from "./utils/useInitialNotification"
 import { usePreferredThemeTracking } from "./utils/usePreferredThemeTracking"
 import { useScreenReaderTracking } from "./utils/useScreenReaderTracking"
@@ -36,6 +39,8 @@ if (UIManager.setLayoutAnimationEnabledExperimental) {
 }
 
 const Main: React.FC = () => {
+  useDebugging()
+  useExperiments()
   useEffect(() => {
     GoogleSignin.configure({
       webClientId: "673710093763-hbj813nj4h3h183c4ildmu8vvqc0ek4h.apps.googleusercontent.com",
@@ -53,8 +58,9 @@ const Main: React.FC = () => {
   useWebViewCookies()
   useDeepLinks()
   useInitialNotification()
-  useExperiments()
+  useSplitExperiments()
   useInitializeQueryPrefetching()
+  useIdentifyUser()
 
   useEffect(() => {
     createAllChannels()

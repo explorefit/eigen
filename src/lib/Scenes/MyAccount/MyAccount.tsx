@@ -12,7 +12,7 @@ import React from "react"
 import { ScrollView } from "react-native"
 import { createFragmentContainer, graphql, QueryRenderer } from "react-relay"
 
-const MyAccount: React.FC<{ me: MyAccount_me }> = ({ me }) => {
+function MyAccount({ me }: { me: MyAccount_me }) {
   return (
     <PageWithSimpleHeader title="Account">
       <ScrollView contentContainerStyle={{ paddingTop: 10 }}>
@@ -53,7 +53,7 @@ const MyAccount: React.FC<{ me: MyAccount_me }> = ({ me }) => {
   )
 }
 
-const MyAccountPlaceholder: React.FC<{}> = ({}) => {
+function MyAccountPlaceholder() {
   return (
     <PageWithSimpleHeader title="Account">
       <Flex px={2} py={1}>

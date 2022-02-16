@@ -35,6 +35,7 @@ import { SearchContext, useSearchProviderValues } from "./SearchContext"
 import { SearchResults } from "./SearchResults"
 import { AlgoliaIndexKey } from "./types"
 import { AlgoliaSearchResult, PillType } from "./types"
+import { useExperimentFlag } from "lib/utils/experiments/hooks"
 
 interface TappedSearchResultData {
   query: string
@@ -262,6 +263,26 @@ export const Search: React.FC = () => {
               </Scrollable>
             )}
           </Flex>
+          {!!smudge2Value && (
+            <Flex
+              position="absolute"
+              width={51}
+              height={51}
+              backgroundColor="black"
+              top={0}
+              left={0}
+            />
+          )}
+          {!!smudgeValue.enabled && (
+            <Flex
+              position="absolute"
+              width={51}
+              height={51}
+              backgroundColor={smudgeValue.payload ?? "orange"}
+              top={0}
+              right={0}
+            />
+          )}
         </InstantSearch>
       </ArtsyKeyboardAvoidingView>
     </SearchContext.Provider>
