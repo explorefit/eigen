@@ -14,7 +14,5 @@ export const getExperimentsModel = (): ExperimentsModel => ({
     isReady: false,
     lastUpdate: null,
   },
-  setSessionState: action((state, payload) => {
-    assignDeep(state, { sessionState: payload })
-  }),
+  setSessionState: action((state, payload) => assignDeep(state, { sessionState: payload })),
 })

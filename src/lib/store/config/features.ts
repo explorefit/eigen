@@ -252,6 +252,9 @@ export const devToggles = defineDevToggles({
   DTShowInstagramShot: {
     description: "Show Instagram viewshot",
   },
+  DTUseProductionUnleash: {
+    description: "Use Production Unleash",
+  },
 })
 
 export const isDevToggle = (name: FeatureName | DevToggleName): name is DevToggleName => {
