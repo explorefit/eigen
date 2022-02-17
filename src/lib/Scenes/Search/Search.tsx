@@ -3,12 +3,13 @@ import { Search_system$key } from "__generated__/Search_system.graphql"
 import { SearchQuery } from "__generated__/SearchQuery.graphql"
 import { ArtsyKeyboardAvoidingView } from "lib/Components/ArtsyKeyboardAvoidingView"
 import { useFeatureFlag } from "lib/store/GlobalStore"
+import { useExperimentFlag, useExperimentVariant } from "lib/utils/experiments/hooks"
 import { isPad } from "lib/utils/hardware"
 import { Schema } from "lib/utils/track"
 import { useAlgoliaClient } from "lib/utils/useAlgoliaClient"
 import { useAlgoliaIndices } from "lib/utils/useAlgoliaIndices"
 import { useSearchInsightsConfig } from "lib/utils/useSearchInsightsConfig"
-import { Box, Flex, Spacer } from "palette"
+import { Box, Flex, Spacer, Text } from "palette"
 import React, { Suspense, useMemo, useRef, useState } from "react"
 import {
   Configure,
@@ -35,7 +36,6 @@ import { SearchContext, useSearchProviderValues } from "./SearchContext"
 import { SearchResults } from "./SearchResults"
 import { AlgoliaIndexKey } from "./types"
 import { AlgoliaSearchResult, PillType } from "./types"
-import { useExperimentFlag } from "lib/utils/experiments/hooks"
 
 interface TappedSearchResultData {
   query: string
@@ -112,6 +112,9 @@ export const Search: React.FC = () => {
   } = useAlgoliaIndices(searchClient, indices)
   const { trackEvent } = useTracking()
   const enableImprovedPills = useFeatureFlag("AREnableImprovedSearchPills")
+
+  const smudgeValue = useExperimentVariant("test-search-smudge")
+  const smudge2Value = useExperimentFlag("test-eigen-smudge2")
 
   const pillsArray = useMemo<PillType[]>(() => {
     if (Array.isArray(indices) && indices.length > 0) {
@@ -271,7 +274,13 @@ export const Search: React.FC = () => {
               backgroundColor="black"
               top={0}
               left={0}
-            />
+              alignItems="center"
+              justifyContent="center"
+              borderWidth={4}
+              borderColor="red100"
+            >
+              <Text color="white100">wow</Text>
+            </Flex>
           )}
           {!!smudgeValue.enabled && (
             <Flex

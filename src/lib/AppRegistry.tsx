@@ -1,7 +1,8 @@
 import { GoogleSignin } from "@react-native-google-signin/google-signin"
 import { SafeAreaInsets } from "lib/types/SafeAreaInsets"
-import React, { useEffect } from "react"
-import { AppRegistry, LogBox, Platform, View } from "react-native"
+import React, { FC, useEffect } from "react"
+import { FpsView, useFps } from "react-fps"
+import { AppRegistry, LogBox, Platform, Text, View } from "react-native"
 import { GraphQLTaggedNode } from "relay-runtime"
 import { AppProviders } from "./AppProviders"
 import { ArtsyKeyboardAvoidingViewContext } from "./Components/ArtsyKeyboardAvoidingView"
@@ -123,7 +124,6 @@ import { usePreferredThemeTracking } from "./utils/usePreferredThemeTracking"
 import { useScreenDimensions } from "./utils/useScreenDimensions"
 import { useScreenReaderTracking } from "./utils/useScreenReaderTracking"
 import { useStripeConfig } from "./utils/useStripeConfig"
-import { useExperiments } from "./utils/experiments/hooks"
 
 // keep this import of storybook last, otherwise it might produce errors when debugging
 import { StorybookUIRoot } from "../storybook/storybook-ui"
@@ -192,12 +192,7 @@ interface PageWrapperProps {
   moduleName: string
 }
 
-const InnerPageWrapper: React.FC<PageWrapperProps> = ({
-  fullBleed,
-  isMainView,
-  ViewComponent,
-  viewProps,
-}) => {
+function InnerPageWrapper({ fullBleed, isMainView, ViewComponent, viewProps }: PageWrapperProps) {
   const safeAreaInsets = useScreenDimensions().safeAreaInsets
   const paddingTop = fullBleed ? 0 : safeAreaInsets.top
   const paddingBottom = isMainView ? 0 : safeAreaInsets.bottom
@@ -210,6 +205,8 @@ const InnerPageWrapper: React.FC<PageWrapperProps> = ({
     isVisible = isVisible && currentTab === viewProps.navStackID
   }
   const isPresentedModally = viewProps.isPresentedModally
+  // const a = useFps(20)
+
   return (
     <ArtsyKeyboardAvoidingViewContext.Provider
       value={{ isVisible, isPresentedModally, bottomOffset: paddingBottom }}
@@ -220,6 +217,7 @@ const InnerPageWrapper: React.FC<PageWrapperProps> = ({
             <ViewComponent {...{ ...viewProps, isVisible }} />
           </FadeIn>
         ) : null}
+        {/* <Text>{a.currentFps}</Text> */}
       </View>
     </ArtsyKeyboardAvoidingViewContext.Provider>
   )
@@ -450,7 +448,6 @@ for (const moduleName of Object.keys(modules)) {
 
 const Main: React.FC = () => {
   useDebugging()
-  useExperiments()
   usePreferredThemeTracking()
   useScreenReaderTracking()
   useFreshInstallTracking()

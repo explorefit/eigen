@@ -1,35 +1,43 @@
-import { useEffect, useState } from "react"
-import { getUnleashClient } from "./unleashClient"
+import { useContext, useEffect, useState } from "react"
 import { IMutableContext } from "unleash-proxy-client"
+import { getUnleashClient } from "./unleashClient"
+import { UnleashContext } from "./UnleashProvider"
 
-export function useExperiments() {
-  const [lastUpdate, setLastUpdate] = useState<Date | null>(null)
-
-  useEffect(() => {
-    const client = getUnleashClient()
-
-    client.on("ready", () => {
-      console.log("unleashClient ready")
-    })
-    client.on("update", () => {
-      console.log("unleashClient update")
-      setLastUpdate(new Date())
-    })
-    client.on("error", () => {
-      console.log("unleashClient error")
-    })
-    client.on("initialized", () => {
-      console.log("unleashClient initialized")
-    })
-    client.on("impression", () => {
-      console.log("unleashClient impression")
-    })
-
-    return () => {
-      console.log("unleashClient stopping")
-      client.stop()
-    }
-  }, [])
+export function updateExperimentsContext(newContext: IMutableContext) {
+  const client = getUnleashClient()
+  return client.updateContext(newContext)
 }
 
 export function useExperimentFlag(name: string) {
+  const client = getUnleashClient()
+  const [enabled, setEnabled] = useState(client.isEnabled(name))
+
+  const { lastUpdate } = useContext(UnleashContext)
+  useEffect(() => {
+    setEnabled(client.isEnabled(name))
+  }, [lastUpdate])
+
+  return enabled
+}
+
+export function useExperimentVariant(name: string): {
+  enabled: boolean
+  variant: string
+  payload?: string
+} {
+  const client = getUnleashClient()
+  const [enabled, setEnabled] = useState(client.isEnabled(name))
+  const [variant, setVariant] = useState(client.getVariant(name))
+
+  const { lastUpdate } = useContext(UnleashContext)
+  useEffect(() => {
+    setEnabled(client.isEnabled(name))
+    setVariant(client.getVariant(name))
+  }, [lastUpdate])
+
+  return {
+    enabled,
+    variant: variant.name,
+    payload: variant.payload?.value,
+  }
+}

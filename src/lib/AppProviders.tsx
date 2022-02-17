@@ -10,6 +10,7 @@ import { ToastProvider } from "./Components/Toast/toastHook"
 import { defaultEnvironment } from "./relay/createEnvironment"
 import { GlobalStoreProvider } from "./store/GlobalStore"
 import { combineProviders } from "./utils/combineProviders"
+import { UnleashProvider } from "./utils/experiments/UnleashProvider"
 import { track } from "./utils/track"
 import { ProvideScreenDimensions } from "./utils/useScreenDimensions"
 
@@ -20,6 +21,7 @@ export const AppProviders = ({ children }: { children?: ReactNode }) =>
       // if Provider A is using another Provider B, then A needs to appear below B.
       TrackingProvider,
       GlobalStoreProvider,
+      UnleashProvider, // uses: GlobalStoreProvider
       SafeAreaProvider,
       ProvideScreenDimensions, // uses: SafeAreaProvider
       RelayDefaultEnvProvider,
