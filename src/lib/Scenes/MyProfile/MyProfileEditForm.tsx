@@ -391,7 +391,7 @@ export const MyProfileEditForm: React.FC = () => {
         </Join>
       </ScrollView>
       {!!showVerificationBanner && (
-        <VerificationConfirmationBannerForEmail
+        <VerificationBanner
           isLoading={isverificationLoading}
           didSuccessfullyVerify={didSuccessfullyVerify}
           email={me?.email ?? ""}
@@ -586,7 +586,7 @@ const ProfileVerifications = ({
   )
 }
 
-const VerificationConfirmationBannerForEmail = ({
+const VerificationBanner = ({
   isLoading,
   didSuccessfullyVerify,
   email,
