@@ -1,4 +1,4 @@
-import { fireEvent, waitForElementToBeRemoved } from "@testing-library/react-native"
+import { fireEvent } from "@testing-library/react-native"
 import { MyProfileEditFormTestsQuery } from "__generated__/MyProfileEditFormTestsQuery.graphql"
 import { defaultEnvironment } from "lib/relay/createEnvironment"
 import { __globalStoreTestUtils__ } from "lib/store/GlobalStore"
@@ -82,7 +82,7 @@ describe("MyProfileEditForm", () => {
         })
 
         it("Triggers the email verification when they user presses on Verify Your Email when canRequestEmailConfirmation is set to true", async () => {
-          const { getByTestId, getByText } = renderWithWrappersTL(<TestRenderer />)
+          const { getByTestId } = renderWithWrappersTL(<TestRenderer />)
           mockEnvironmentPayload(mockEnvironment, {
             Me: () => ({
               canRequestEmailConfirmation: true,
